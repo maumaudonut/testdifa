@@ -1,4 +1,11 @@
-body { font-family: Arial; margin: 20px; }
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 20px;
+    background: linear-gradient(to right, #eef2f3, #ffffff);
+    color: #333;
+}
+
 
 /* ===================== style.css ===================== */
 
@@ -7,8 +14,13 @@ table {
     border-collapse: collapse;
     margin-top: 20px;
     font-size: 14px;
-    font-family: Arial, sans-serif;
-}
+
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+
 
 th, td {
     border: 1px solid #ddd;
@@ -16,7 +28,10 @@ th, td {
 }
 
 th {
-    background-color: #f2f2f2;
+
+    background-color: #4a90e2;
+    color: #fff;
+
     text-align: center;
     font-weight: bold;
 }
@@ -26,9 +41,10 @@ td {
 }
 
 tr:nth-child(even) {
-    background-color: #f9f9f9;
+
+    background-color: #f5f7fa;
 }
 
 tr:hover {
-    background-color: #e6f7ff;
-}
+    background-color: #d9e9ff;
+
