@@ -39,12 +39,5 @@ Projekt/
 
 This prototype uses local CSV files for historical price data and stores backtest results in `results/` as pickled Pandas Series.
 
-All modules use a central logging configuration defined in `my_trading_bot/config/logger.py`. Log files are written to `Projekt/my_trading_bot/logs/trading_bot.log`.
 
-## Dokumentation
-Technische Dokumentation wird mit [Sphinx](https://www.sphinx-doc.org) generiert. Im Ordner `Projekt/my_trading_bot/docs/source` befinden sich die Konfigurationsdateien. Die HTML-Dokumente lassen sich mit folgendem Befehl erstellen:
-
-```bash
-sphinx-build Projekt/my_trading_bot/docs/source docs_build
-```
 
