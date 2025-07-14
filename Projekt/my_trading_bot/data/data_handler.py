@@ -5,7 +5,7 @@ import pandas as pd
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data", "historical_prices")
 
-PREDEFINED_SYMBOLS = ["AAPL", "GOOG"]
+from config.settings import PREDEFINED_SYMBOLS
 
 def download_and_save_data():
     os.makedirs(DATA_DIR, exist_ok=True)
