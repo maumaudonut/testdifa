@@ -7,6 +7,11 @@ from strategies.macd_strategy import MACDStrategy
 from strategies.rsi_strategy import RSIStrategy
 from strategies.sma_strategy import SMAStrategy
 from strategies.dummy_strategy import DummyStrategy
+from strategies.ai_strategy import AIStrategy
+from strategies.dtw_strategy import DTWStrategy
+from strategies.horizontal_pattern_strategy import HorizontalPatternStrategy
+from strategies.bollinger_strategy import BollingerStrategy
+from strategies.zigzag_strategy import ZigZagStrategy
 from config.settings import PREDEFINED_SYMBOLS, CAPITAL, COMMISSION
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -18,7 +23,12 @@ def run_backtests():
         "MACD": MACDStrategy,
         "RSI": RSIStrategy,
         "SMA": SMAStrategy,
-        "DUMMY": DummyStrategy
+        "DUMMY": DummyStrategy,
+        "AI": AIStrategy,
+        "DTW": DTWStrategy,
+        "HORIZONTAL": HorizontalPatternStrategy,
+        "BOLLINGER": BollingerStrategy,
+        "ZIGZAG": ZigZagStrategy
     }
 
     os.makedirs(RESULT_DIR, exist_ok=True)
