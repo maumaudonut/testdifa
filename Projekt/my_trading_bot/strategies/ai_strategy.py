@@ -2,12 +2,14 @@ import backtrader as bt
 from sklearn.linear_model import LogisticRegression
 
 class AIStrategy(bt.Strategy):
+
     params = dict(train_period=200, prob_threshold=0.55)
 
     def __init__(self):
         self.dataclose = self.datas[0].close
         self.rsi = bt.indicators.RSI_SMA(self.dataclose, period=14)
         self.sma = bt.indicators.SimpleMovingAverage(self.dataclose, period=14)
+
         self.model = LogisticRegression(solver="liblinear")
 
     def next(self):
