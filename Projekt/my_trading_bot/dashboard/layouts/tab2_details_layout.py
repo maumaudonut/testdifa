@@ -1,5 +1,4 @@
 # ==================== dashboard/layouts/tab2_details_layout.py ====================
-"""Layout definition for Tab 2 - Strategy details."""
 
 from dash import html, dcc
 from dashboard.data_loader import get_available_results

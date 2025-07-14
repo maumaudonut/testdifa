@@ -6,5 +6,3 @@ quantstats
 scikit-learn
 fastdtw
 scipy
-sphinx
-yfinance

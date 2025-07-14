@@ -1,12 +1,6 @@
-"""Main entry point for the Plotly Dash dashboard."""
-
 import dash
 from dash import dcc, html
-from dashboard.layouts import (
-    tab1_overview_layout,
-    tab2_details_layout,
-    tab3_descriptions_layout,
-)
+from dashboard.layouts import tab1_overview_layout, tab2_details_layout, tab3_descriptions_layout
 
 app = dash.Dash(__name__, suppress_callback_exceptions=True)
 app.title = "Trading Dashboard"
@@ -25,7 +19,6 @@ app.layout = html.Div([
     [dash.dependencies.Input('tabs', 'value')]
 )
 def render_tab_content(tab):
-    """Return the layout for the currently active tab."""
     if tab == 'tab1':
         return tab1_overview_layout.layout
     elif tab == 'tab2':

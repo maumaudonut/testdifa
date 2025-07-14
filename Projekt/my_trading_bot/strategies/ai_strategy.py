@@ -1,4 +1,3 @@
-"""AI-based strategy using logistic regression on RSI and SMA."""
 import backtrader as bt
 from sklearn.linear_model import LogisticRegression
 
@@ -30,4 +29,3 @@ class AIStrategy(bt.Strategy):
                 self.buy()
             elif self.position and prob < 1 - self.p.prob_threshold:
                 self.close()
-
