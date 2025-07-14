@@ -1,6 +1,9 @@
 # My Trading Bot Dashboard
+This repository contains a small prototype for a trading strategy backtesting framework. It includes example strategies, historical data and a Plotly Dash web interface to analyze the backtest results. The dashboard consists of three tabs:
+1. **Übersicht & Vergleich** – mehrere Strategien und Symbole gleichzeitig vergleichen
+2. **Strategiedetails** – detaillierte Metriken für eine Strategie/Symbol-Kombination
+3. **Strategiebeschreibungen** – Textbeschreibungen aus dem `docs/` Ordner
 
-This repository contains a small prototype for a trading strategy backtesting framework. It includes example strategies, historical data and a Plotly Dash web interface to analyze the backtest results.
 
 ## Folder structure
 
@@ -12,10 +15,9 @@ Projekt/
     data/                       # Data download helpers and CSV files
     dashboard/                  # Plotly Dash application
     docs/                       # Markdown descriptions for strategies
-    results/                    # Pickled returns from completed backtests
+    results/                    # Pickled returns named <STRATEGY>_<SYMBOL>_returns.pkl
     strategies/                 # Example trading strategies
   requirements.txt
-```
 
 ## Usage
 1. Install dependencies:
@@ -36,3 +38,4 @@ Projekt/
    - **Strategiebeschreibungen** – read the markdown descriptions
 
 This prototype uses local CSV files for historical price data and stores backtest results in `results/` as pickled Pandas Series.
+

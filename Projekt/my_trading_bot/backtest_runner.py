@@ -42,7 +42,8 @@ def run_backtests():
             returns = results[0].analyzers.timereturn.get_analysis()
             returns_series = pd.Series(returns)
 
-            with open(os.path.join(RESULT_DIR, f"{symbol}_{strat_name}.pkl"), "wb") as f:
+            filename = f"{strat_name}_{symbol}_returns.pkl"
+            with open(os.path.join(RESULT_DIR, filename), "wb") as f:
                 pickle.dump(returns_series, f)
 
 if __name__ == "__main__":
