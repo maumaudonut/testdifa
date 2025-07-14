@@ -1,4 +1,5 @@
 # ==================== dashboard/layouts/tab3_descriptions_layout.py ====================
+"""Layout definition for Tab 3 - Strategy descriptions."""
 
 import os
 from dash import html, dcc

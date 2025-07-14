@@ -1,12 +1,16 @@
 # ==================== dashboard/callbacks/tab1_overview_callbacks.py ====================
+"""Callbacks for Tab 1 - overview and comparison of strategies."""
 
 import dash
 from dash.dependencies import Input, Output
 from dashboard.data_loader import load_returns
 from dash import html
+from config.logger import get_logger
 import plotly.graph_objs as go
 import quantstats.stats as qs_stats
 import pandas as pd
+
+logger = get_logger(__name__)
 
 @dash.callback(
     [Output("performance-table", "children"),
@@ -15,7 +19,9 @@ import pandas as pd
      Input("overview-strategy-dropdown", "value")]
 )
 def update_overview_tab(selected_symbols, selected_strategies):
+    """Generate performance table and plot for selected combinations."""
     if not selected_symbols or not selected_strategies:
+        logger.debug("Overview tab called without full selection")
         return dash.no_update, dash.no_update
 
     rows = []
@@ -23,6 +29,7 @@ def update_overview_tab(selected_symbols, selected_strategies):
 
     for symbol in selected_symbols:
         for strategy in selected_strategies:
+            logger.debug("Loading returns for %s %s", symbol, strategy)
             returns = load_returns(symbol, strategy)
             if not returns.empty:
                 returns.index = pd.to_datetime(returns.index)

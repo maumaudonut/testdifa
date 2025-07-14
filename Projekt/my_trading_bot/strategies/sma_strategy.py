@@ -1,3 +1,4 @@
+"""Simple moving average crossover strategy."""
 import backtrader as bt
 
 class SMAStrategy(bt.Strategy):
@@ -9,3 +10,4 @@ class SMAStrategy(bt.Strategy):
             self.buy()
         elif self.position and self.data.close[0] < self.sma[0]:
             self.close()
+

@@ -1,8 +1,12 @@
+"""Run backtests for all strategies and symbols."""
 import os
 import pickle
 import pandas as pd
 import backtrader as bt
 from data.data_handler import download_and_save_data
+from config.logger import get_logger
+
+logger = get_logger(__name__)
 from strategies.macd_strategy import MACDStrategy
 from strategies.rsi_strategy import RSIStrategy
 from strategies.sma_strategy import SMAStrategy
@@ -19,6 +23,8 @@ RESULT_DIR = os.path.join(BASE_DIR, "results")
 DATA_DIR = os.path.join(BASE_DIR, "data", "historical_prices")
 
 def run_backtests():
+    """Execute all backtests and store the return series."""
+    logger.info("Starting backtests")
     strategies = {
         "MACD": MACDStrategy,
         "RSI": RSIStrategy,
@@ -33,11 +39,14 @@ def run_backtests():
 
     os.makedirs(RESULT_DIR, exist_ok=True)
     download_and_save_data()
+    logger.info("Historical data downloaded")
 
     for symbol in PREDEFINED_SYMBOLS:
+        logger.info("Running backtests for symbol %s", symbol)
         df = pd.read_csv(os.path.join(DATA_DIR, f"{symbol}.csv"), index_col="datetime", parse_dates=True)
 
         for strat_name, strat_class in strategies.items():
+            logger.debug("Running strategy %s on %s", strat_name, symbol)
             cerebro = bt.Cerebro()
             data = bt.feeds.PandasData(dataname=df)
             cerebro.adddata(data)
@@ -55,6 +64,9 @@ def run_backtests():
             filename = f"{strat_name}_{symbol}_returns.pkl"
             with open(os.path.join(RESULT_DIR, filename), "wb") as f:
                 pickle.dump(returns_series, f)
+            logger.info("Saved results: %s", filename)
 
 if __name__ == "__main__":
     run_backtests()
+    logger.info("Backtests completed")
+

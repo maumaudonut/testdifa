@@ -1,3 +1,4 @@
+"""Strategy based on Bollinger Bands."""
 import backtrader as bt
 
 class BollingerStrategy(bt.Strategy):
@@ -13,3 +14,4 @@ class BollingerStrategy(bt.Strategy):
             self.buy()
         elif self.position and self.datas[0].close[0] > self.bbands.lines.mid[0]:
             self.close()
+

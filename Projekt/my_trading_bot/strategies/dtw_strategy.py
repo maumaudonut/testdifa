@@ -1,3 +1,4 @@
+"""Pattern matching strategy using Dynamic Time Warping."""
 import backtrader as bt
 
 class DTWStrategy(bt.Strategy):
@@ -17,3 +18,4 @@ class DTWStrategy(bt.Strategy):
             self.buy()
         elif self.position and distance > self.p.threshold * 2:
             self.close()
+
