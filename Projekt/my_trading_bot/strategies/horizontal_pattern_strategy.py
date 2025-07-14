@@ -1,3 +1,4 @@
+"""Strategy trading on horizontal breakouts."""
 import backtrader as bt
 
 class HorizontalPatternStrategy(bt.Strategy):
@@ -14,3 +15,4 @@ class HorizontalPatternStrategy(bt.Strategy):
             self.buy()
         elif self.position and self.data.close[0] < min_low:
             self.close()
+

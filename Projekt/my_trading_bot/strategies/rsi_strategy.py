@@ -1,3 +1,4 @@
+"""RSI based trading strategy."""
 import backtrader as bt
 
 class RSIStrategy(bt.Strategy):
@@ -9,3 +10,4 @@ class RSIStrategy(bt.Strategy):
             self.buy()
         elif self.position and self.rsi > 70:
             self.close()
+
