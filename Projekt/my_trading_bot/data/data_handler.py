@@ -10,7 +10,7 @@ from config.settings import PREDEFINED_SYMBOLS
 def download_and_save_data():
     os.makedirs(DATA_DIR, exist_ok=True)
     for symbol in PREDEFINED_SYMBOLS:
-        df = yf.download(symbol, start="2015-01-01", end="2023-01-01")
+        df = yf.download(symbol, start="2015-01-01", end="2025-06-30")
         df.dropna(inplace=True)
         df = df[['Open', 'High', 'Low', 'Close', 'Volume']]
         df.columns = ['open', 'high', 'low', 'close', 'volume']

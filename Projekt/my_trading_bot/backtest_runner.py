@@ -43,7 +43,7 @@ def run_backtests():
             cerebro.adddata(data)
             cerebro.addstrategy(strat_class)
             #Batch Size anpassen bei Bedarf aktuell 10%-> 10% des Kapitals pro Trade
-            cerebro.addsizer(bt.sizers.PercentSizer, percents=10)
+            cerebro.addsizer(bt.sizers.PercentSizer, percents=5)
             cerebro.broker.set_cash(CAPITAL)
             cerebro.broker.setcommission(commission=COMMISSION)
             cerebro.addanalyzer(bt.analyzers.TimeReturn, _name='timereturn')
