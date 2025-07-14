@@ -3,3 +3,6 @@ plotly
 pandas
 backtrader
 quantstats
+scikit-learn
+fastdtw
+scipy
