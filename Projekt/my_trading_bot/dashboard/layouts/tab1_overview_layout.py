@@ -1,3 +1,5 @@
+"""Layout definition for Tab 1 - Overview."""
+
 from dash import html, dcc
 from dashboard.data_loader import get_available_results
 

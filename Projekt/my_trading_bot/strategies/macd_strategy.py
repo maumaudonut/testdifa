@@ -1,3 +1,4 @@
+"""MACD crossover trading strategy."""
 import backtrader as bt
 
 class MACDStrategy(bt.Strategy):

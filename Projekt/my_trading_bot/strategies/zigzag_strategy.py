@@ -1,3 +1,4 @@
+"""Trend following strategy using zig-zag percentage moves."""
 import backtrader as bt
 
 class ZigZagStrategy(bt.Strategy):
@@ -18,3 +19,4 @@ class ZigZagStrategy(bt.Strategy):
         elif self.position and change <= -self.p.perc:
             self.close()
             self.last_pivot = price
+

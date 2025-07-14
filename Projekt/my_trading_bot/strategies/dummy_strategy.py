@@ -1,3 +1,4 @@
+"""Example strategy used for testing."""
 import backtrader as bt
 
 class DummyStrategy(bt.Strategy):
@@ -11,3 +12,4 @@ class DummyStrategy(bt.Strategy):
                 self.buy()
             else:
                 self.close()
+
