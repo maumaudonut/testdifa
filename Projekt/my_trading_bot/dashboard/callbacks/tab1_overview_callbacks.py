@@ -5,7 +5,8 @@ from dash.dependencies import Input, Output
 from dashboard.data_loader import load_returns
 from dash import html
 import plotly.graph_objs as go
-import quantstats.reports as qsr
+import quantstats.stats as qs_stats
+import pandas as pd
 
 @dash.callback(
     [Output("performance-table", "children"),
@@ -24,24 +25,49 @@ def update_overview_tab(selected_symbols, selected_strategies):
         for strategy in selected_strategies:
             returns = load_returns(symbol, strategy)
             if not returns.empty:
-                stats_df = qsr.metrics(returns, display=False)
-                stats_dict = stats_df.iloc[:, 0].to_dict()  # Zugriff auf die erste Spalte
-                stats = (
-                    stats_dict.get("cagr", 0),
-                    stats_dict.get("sharpe", 0),
-                    stats_dict.get("max_drawdown", 0)
-                )
+                returns.index = pd.to_datetime(returns.index)
+                returns = returns.asfreq('B').fillna(0)
+
+                def get_metric(metric_func):
+                    try:
+                        val = metric_func(returns)
+                        return f"{val:.5f}" if val is not None else "N/A"
+                    except Exception:
+                        return "N/A"
+
                 rows.append(html.Tr([
                     html.Td(symbol),
                     html.Td(strategy),
-                    html.Td(f"{stats[0]:.2%}"),
-                    html.Td(f"{stats[1]:.2f}"),
-                    html.Td(f"{stats[2]:.2%}")
+                    html.Td(get_metric(qs_stats.consecutive_wins)),
+                    html.Td(get_metric(qs_stats.consecutive_losses)),
+                    html.Td(get_metric(qs_stats.avg_return)),
+                    html.Td(get_metric(qs_stats.avg_loss)),
+                    html.Td(get_metric(qs_stats.win_rate)),
+                    html.Td(get_metric(qs_stats.win_loss_ratio)),
+                    html.Td(get_metric(qs_stats.probabilistic_sharpe_ratio)),
+                    html.Td(get_metric(qs_stats.profit_factor))
                 ]))
-                fig.add_trace(go.Scatter(x=returns.index, y=(1 + returns).cumprod(), mode='lines', name=f"{symbol}-{strategy}"))
+
+                fig.add_trace(go.Scatter(
+                    x=returns.index,
+                    y=(1 + returns).cumprod(),
+                    mode='lines',
+                    name=f"{symbol}-{strategy}"
+                ))
 
     table = html.Table([
-        html.Thead(html.Tr([html.Th("Symbol"), html.Th("Strategie"), html.Th("CAGR"), html.Th("Sharpe"), html.Th("Max Drawdown")])),
+        html.Thead(html.Tr([
+            html.Th("Symbol"),
+            html.Th("Strategie"),
+            html.Th("consecutive_wins"),
+            html.Th("consecutive_losses"),
+            html.Th("avg_return"),
+            html.Th("avg_loss"),
+            html.Th("win_rate"),
+            html.Th("win_loss_ratio"),
+            html.Th("probabilistic_sharpe_ratio"),
+            html.Th("profit_factor")
+        ])),
         html.Tbody(rows)
     ])
 
